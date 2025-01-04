@@ -1,14 +1,8 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { CheckCircle2, Clock, AlertCircle } from "lucide-react";
-
-interface Task {
-  id: string;
-  title: string;
-  priority: "high" | "medium" | "low";
-  deadline: string;
-  status: "pending" | "in-progress" | "completed";
-}
+import { Task } from "@/pages/Tasks";
 
 const getPriorityColor = (priority: Task["priority"]) => {
   switch (priority) {
@@ -35,9 +29,20 @@ const getStatusIcon = (status: Task["status"]) => {
 interface TaskListProps {
   title: string;
   tasks: Task[];
+  onStatusChange?: (taskId: string, newStatus: Task["status"]) => void;
 }
 
-export const TaskList = ({ title, tasks }: TaskListProps) => {
+export const TaskList = ({ title, tasks, onStatusChange }: TaskListProps) => {
+  const handleStatusClick = (task: Task) => {
+    if (!onStatusChange) return;
+    
+    const statusOrder: Task["status"][] = ["pending", "in-progress", "completed"];
+    const currentIndex = statusOrder.indexOf(task.status);
+    const nextStatus = statusOrder[(currentIndex + 1) % statusOrder.length];
+    
+    onStatusChange(task.id, nextStatus);
+  };
+
   return (
     <Card className="p-6">
       <h2 className="text-xl font-semibold mb-4">{title}</h2>
@@ -48,7 +53,14 @@ export const TaskList = ({ title, tasks }: TaskListProps) => {
             className="flex items-center justify-between p-4 bg-white rounded-lg border border-gray-100 hover:border-primary/20 transition-colors"
           >
             <div className="flex items-center gap-4">
-              {getStatusIcon(task.status)}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="cursor-pointer"
+                onClick={() => handleStatusClick(task)}
+              >
+                {getStatusIcon(task.status)}
+              </Button>
               <div>
                 <h3 className="font-medium">{task.title}</h3>
                 <p className="text-sm text-gray-500">Due {task.deadline}</p>
