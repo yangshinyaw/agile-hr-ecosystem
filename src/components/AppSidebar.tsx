@@ -1,4 +1,12 @@
-import { Home, CheckSquare, Calendar, Bell, BarChart } from "lucide-react";
+import { 
+  Home, 
+  CheckSquare, 
+  Calendar as CalendarIcon, 
+  Bell, 
+  Users, 
+  BarChart, 
+  FileText 
+} from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import {
   Sidebar,
@@ -14,9 +22,11 @@ import {
 const menuItems = [
   { title: "Dashboard", icon: Home, url: "/" },
   { title: "Tasks", icon: CheckSquare, url: "/tasks" },
-  { title: "Calendar", icon: Calendar, url: "/calendar" },
+  { title: "Calendar", icon: CalendarIcon, url: "/calendar" },
   { title: "Notifications", icon: Bell, url: "/notifications" },
-  { title: "Reports", icon: BarChart, url: "/reports" },
+  { title: "Employees", icon: Users, url: "/employees" },
+  { title: "Performance", icon: BarChart, url: "/performance" },
+  { title: "Documents", icon: FileText, url: "/documents" },
 ];
 
 export function AppSidebar() {
