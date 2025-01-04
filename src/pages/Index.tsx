@@ -9,25 +9,25 @@ const mockTasks = [
   {
     id: "1",
     title: "Review Q2 Performance Reports",
-    priority: "high",
+    priority: "high" as const,
     deadline: "Tomorrow at 5 PM",
-    status: "pending",
+    status: "pending" as const,
   },
   {
     id: "2",
     title: "Schedule Team Building Event",
-    priority: "medium",
+    priority: "medium" as const,
     deadline: "Next Week",
-    status: "in-progress",
+    status: "in-progress" as const,
   },
   {
     id: "3",
     title: "Update Employee Handbook",
-    priority: "low",
+    priority: "low" as const,
     deadline: "Next Month",
-    status: "completed",
+    status: "completed" as const,
   },
-] as const;
+];
 
 const Index = () => {
   return (
