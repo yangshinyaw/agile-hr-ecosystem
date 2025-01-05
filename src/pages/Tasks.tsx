@@ -1,7 +1,6 @@
 import { Layout } from "@/components/Layout";
 import { TaskList } from "@/components/dashboard/TaskList";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { TaskForm } from "@/components/dashboard/TaskForm";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -50,6 +49,10 @@ const Tasks = () => {
     });
   };
 
+  const handleTaskCreated = (newTask: Task) => {
+    setTasks(prevTasks => [newTask, ...prevTasks]);
+  };
+
   return (
     <Layout>
       <div className="space-y-8">
@@ -58,10 +61,7 @@ const Tasks = () => {
             <h1 className="text-3xl font-bold">Tasks</h1>
             <p className="text-gray-600 mt-1">Manage your team's tasks</p>
           </div>
-          <Button className="bg-primary hover:bg-primary/90">
-            <Plus className="w-4 h-4 mr-2" />
-            Create Task
-          </Button>
+          <TaskForm onTaskCreated={handleTaskCreated} />
         </div>
         <TaskList 
           title="All Tasks" 

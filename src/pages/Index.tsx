@@ -1,7 +1,7 @@
 import { Layout } from "@/components/Layout";
 import { StatCard } from "@/components/dashboard/StatCard";
 import { TaskList } from "@/components/dashboard/TaskList";
-import { Button } from "@/components/ui/button";
+import { TaskForm } from "@/components/dashboard/TaskForm";
 import { CheckCircle2, Clock, AlertCircle, Plus } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
@@ -44,6 +44,10 @@ const Index = () => {
     });
   };
 
+  const handleTaskCreated = (newTask: Task) => {
+    setTasks(prevTasks => [newTask, ...prevTasks]);
+  };
+
   const pendingTasks = tasks.filter(task => task.status === "pending").length;
   const inProgressTasks = tasks.filter(task => task.status === "in-progress").length;
   const completedTasks = tasks.filter(task => task.status === "completed").length;
@@ -56,10 +60,7 @@ const Index = () => {
             <h1 className="text-3xl font-bold">Dashboard</h1>
             <p className="text-gray-600 mt-1">Welcome back, HR Manager</p>
           </div>
-          <Button className="bg-primary hover:bg-primary/90">
-            <Plus className="w-4 h-4 mr-2" />
-            Create Task
-          </Button>
+          <TaskForm onTaskCreated={handleTaskCreated} />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
