@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Task } from "@/pages/Tasks";
+import { Plus } from "lucide-react";
 
 interface TaskFormProps {
   onTaskCreated: (task: Task) => void;
@@ -46,7 +47,6 @@ export const TaskForm = ({ onTaskCreated }: TaskFormProps) => {
       description: "Task created successfully",
     });
     
-    // Reset form
     setTitle("");
     setDeadline("");
     setPriority("medium");
@@ -56,7 +56,10 @@ export const TaskForm = ({ onTaskCreated }: TaskFormProps) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button>Create New Task</Button>
+        <Button className="gap-2">
+          <Plus className="w-4 h-4" />
+          Create Task
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
@@ -72,6 +75,7 @@ export const TaskForm = ({ onTaskCreated }: TaskFormProps) => {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Enter task title"
+              className="w-full"
               required
             />
           </div>
@@ -84,6 +88,7 @@ export const TaskForm = ({ onTaskCreated }: TaskFormProps) => {
               type="datetime-local"
               value={deadline}
               onChange={(e) => setDeadline(e.target.value)}
+              className="w-full"
               required
             />
           </div>
@@ -95,7 +100,7 @@ export const TaskForm = ({ onTaskCreated }: TaskFormProps) => {
               value={priority}
               onValueChange={(value: Task["priority"]) => setPriority(value)}
             >
-              <SelectTrigger>
+              <SelectTrigger className="w-full">
                 <SelectValue placeholder="Select priority" />
               </SelectTrigger>
               <SelectContent>
@@ -105,7 +110,7 @@ export const TaskForm = ({ onTaskCreated }: TaskFormProps) => {
               </SelectContent>
             </Select>
           </div>
-          <div className="flex justify-end space-x-2">
+          <div className="flex justify-end gap-2 pt-4">
             <Button
               type="button"
               variant="outline"

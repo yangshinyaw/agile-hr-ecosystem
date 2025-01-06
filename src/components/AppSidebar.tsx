@@ -5,7 +5,8 @@ import {
   Bell, 
   Users, 
   BarChart, 
-  FileText 
+  FileText,
+  LogOut
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -33,13 +34,12 @@ export function AppSidebar() {
   const location = useLocation();
 
   return (
-    <Sidebar>
+    <Sidebar className="border-r border-gray-200 dark:border-gray-800">
       <SidebarContent>
         <div className="p-6">
-          <h1 className="text-2xl font-bold text-primary">HR Hub</h1>
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-primary/70 text-transparent bg-clip-text">HR Hub</h1>
         </div>
         <SidebarGroup>
-          <SidebarGroupLabel>Menu</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
@@ -47,12 +47,14 @@ export function AppSidebar() {
                   <SidebarMenuButton asChild>
                     <Link
                       to={item.url}
-                      className={`flex items-center gap-3 ${
-                        location.pathname === item.url ? "text-primary" : ""
+                      className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors ${
+                        location.pathname === item.url 
+                          ? "bg-primary/10 text-primary" 
+                          : "hover:bg-gray-100 dark:hover:bg-gray-800"
                       }`}
                     >
                       <item.icon className="w-5 h-5" />
-                      <span>{item.title}</span>
+                      <span className="font-medium">{item.title}</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -60,6 +62,12 @@ export function AppSidebar() {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+        <div className="absolute bottom-0 left-0 right-0 p-4">
+          <button className="w-full flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100 transition-colors">
+            <LogOut className="w-5 h-5" />
+            <span>Logout</span>
+          </button>
+        </div>
       </SidebarContent>
     </Sidebar>
   );
