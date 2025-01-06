@@ -62,8 +62,10 @@ export function AppSidebar() {
                           : "hover:bg-gray-100"
                       }`}
                     >
-                      <item.icon className="w-5 h-5" />
-                      <span className="font-medium">{item.title}</span>
+                      <span className="flex items-center gap-3">
+                        <item.icon className="w-5 h-5" />
+                        <span className="font-medium">{item.title}</span>
+                      </span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
