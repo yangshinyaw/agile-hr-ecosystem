@@ -53,7 +53,7 @@ export function AppSidebar() {
             <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton>
+                  <SidebarMenuButton asChild>
                     <Link
                       to={item.url}
                       className={`flex items-center gap-3 px-4 py-2 rounded-md transition-colors ${
@@ -62,10 +62,10 @@ export function AppSidebar() {
                           : "hover:bg-gray-100"
                       }`}
                     >
-                      <span className="flex items-center gap-3">
+                      <div className="flex items-center gap-3">
                         <item.icon className="w-5 h-5" />
                         <span className="font-medium">{item.title}</span>
-                      </span>
+                      </div>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
