@@ -5,7 +5,8 @@ import {
   Bell, 
   Users, 
   BarChart, 
-  FileText 
+  FileText,
+  Menu
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -17,6 +18,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarTrigger,
 } from "@/components/ui/sidebar";
 
 const menuItems = [
@@ -33,13 +35,20 @@ export function AppSidebar() {
   const location = useLocation();
 
   return (
-    <Sidebar>
+    <Sidebar className="border-r border-gray-200">
       <SidebarContent>
-        <div className="p-6">
-          <h1 className="text-2xl font-bold text-primary">HR Hub</h1>
+        <div className="p-6 flex items-center justify-between">
+          <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            HR Hub
+          </h1>
+          <SidebarTrigger asChild>
+            <button className="lg:hidden p-2 hover:bg-gray-100 rounded-md">
+              <Menu className="w-5 h-5" />
+            </button>
+          </SidebarTrigger>
         </div>
         <SidebarGroup>
-          <SidebarGroupLabel>Menu</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-sm font-medium text-gray-500">Menu</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
@@ -47,12 +56,14 @@ export function AppSidebar() {
                   <SidebarMenuButton asChild>
                     <Link
                       to={item.url}
-                      className={`flex items-center gap-3 ${
-                        location.pathname === item.url ? "text-primary" : ""
+                      className={`flex items-center gap-3 px-4 py-2 rounded-md transition-colors ${
+                        location.pathname === item.url 
+                          ? "bg-primary/10 text-primary" 
+                          : "hover:bg-gray-100"
                       }`}
                     >
                       <item.icon className="w-5 h-5" />
-                      <span>{item.title}</span>
+                      <span className="font-medium">{item.title}</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
